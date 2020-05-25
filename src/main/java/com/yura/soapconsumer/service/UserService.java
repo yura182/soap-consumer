@@ -15,8 +15,10 @@ import java.util.List;
 
 public class UserService extends WebServiceGatewaySupport {
 
+    private static final ObjectFactory FACTORY = new ObjectFactory();
+
     public UserDto getUser(Integer id) {
-        GetUserRequest request = new ObjectFactory().createGetUserRequest();
+        GetUserRequest request = FACTORY.createGetUserRequest();
         request.setId(id);
 
         GetUserResponse response = (GetUserResponse) getWebServiceTemplate().marshalSendAndReceive(request);
@@ -25,7 +27,7 @@ public class UserService extends WebServiceGatewaySupport {
     }
 
     public UserDto addUser(UserDto userDto) {
-        AddUserRequest request = new ObjectFactory().createAddUserRequest();
+        AddUserRequest request = FACTORY.createAddUserRequest();
         request.setUser(userDto);
 
         AddUserResponse response = (AddUserResponse) getWebServiceTemplate().marshalSendAndReceive(request);
@@ -34,14 +36,14 @@ public class UserService extends WebServiceGatewaySupport {
     }
 
     public List<UserDto> findAll() {
-        GetUsersRequest request = new ObjectFactory().createGetUsersRequest();
+        GetUsersRequest request = FACTORY.createGetUsersRequest();
         GetUsersResponse response = (GetUsersResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 
         return response.getUsers();
     }
 
     public void delete(Integer id) {
-        DeleteUserRequest request = new ObjectFactory().createDeleteUserRequest();
+        DeleteUserRequest request = FACTORY.createDeleteUserRequest();
         request.setId(id);
 
         getWebServiceTemplate().marshalSendAndReceive(request);
